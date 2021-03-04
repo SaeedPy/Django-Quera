@@ -1,5 +1,25 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 class User(AbstractUser):
-    pass
+
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female')
+    )
+    
+    address = models.TextField(blank=True, null=True)
+    age = models.PositiveIntegerField(blank=True, null=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    first_name = models.CharField(max_length=25, blank=True, null=True)
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=1, blank=True, null=True)
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    last_login = models.DateTimeField(blank=True, null=True)
+    password = models.CharField(max_length=20)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    username = models.CharField(max_length=25, unique=True)
